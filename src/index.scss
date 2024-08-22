@@ -81,7 +81,7 @@ body {
       }
 
       & input {
-        width: 100%;
+        flex: 1;
         height: 100%;
         border: none;
         font-size: 1.5em;
@@ -90,6 +90,76 @@ body {
         &:focus {
           outline: none;
         }
+      }
+
+      & .selected-brands {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+        gap: 1em;
+        background-color: white;
+        border-bottom: 1px solid #9a9a9a;
+        
+        & .share-brands {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.3em;
+        }
+
+        & .cancel-brands {
+          display: flex;
+          align-items: center;
+          color: #9a9a9a;
+          margin-right: 1em;
+          cursor: pointer;
+
+          & .cancel {
+            font-size: 1.3em;
+            margin-right: 0.2em;
+          }
+
+          & span {
+            text-wrap: nowrap;
+          }
+        }
+
+        & .download-brands {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          font-size: 1.3em;
+        }
+
+        & select {
+          border: 1px solid #9a9a9a;
+          border-radius: 5px;
+          background-color: #e9e9e9;
+          padding: 0.5em;
+        }
+      }
+
+      & .back {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 60px;
+        height: 60px;
+        background-color: #646cff;
+        color: white;
+        font-size: 2em;
+      }
+
+      & .title {
+        display: flex;
+        align-items: center;
+        flex: 1;
+        background-color: white;
+        height: 100%;
+        font-size: 1.5em;
+        font-weight: 500;
+        padding: 0 1em;
       }
     }
 

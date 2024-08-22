@@ -4,7 +4,7 @@ import Content from "./components/Content";
 import SavedBrands from "./components/SavedBrands";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainContext from "./MainContext";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import BrandsData from "./brands.json";
 
 function App() {
@@ -24,7 +24,9 @@ function App() {
   };
 
   const data = {
+    brandsArray,
     brands,
+    setBrands,
     selectedBrand,
     setSelectedBrand,
     toggleSelectedBrand,

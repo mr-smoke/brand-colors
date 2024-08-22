@@ -9,7 +9,7 @@ const CopyNotification = ({ color }) => {
         color: `${getContrast(color)}`,
       }}
     >
-      <p>Copied to clipboard</p>
+      <p>Copied to clipboard: {color}</p>
     </div>
   );
 };

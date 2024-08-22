@@ -2,8 +2,11 @@ import { useEffect, useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
 import CopyNotification from "./CopyNotification";
 import { getContrast } from "../helpers";
+import MainContext from "../MainContext";
+import { useContext } from "react";
 
-const Brand = ({ brand, selectedBrand, toggleSelectedBrand }) => {
+const Brand = ({ brand }) => {
+  const { selectedBrand, toggleSelectedBrand } = useContext(MainContext);
   const [copied, setCopied] = useState(false);
   const [copiedColor, setCopiedColor] = useState("");
 
