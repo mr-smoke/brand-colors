@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainContext from "./MainContext";
 import { useEffect, useState } from "react";
 import BrandsData from "./brands.json";
+import CopyNotification from "./components/CopyNotification";
 
 function App() {
   let brandsArray = [];
@@ -14,6 +15,8 @@ function App() {
   });
   const [brands, setBrands] = useState(brandsArray);
   const [selectedBrand, setSelectedBrand] = useState([]);
+  const [copied, setCopied] = useState(false);
+  const [copiedColor, setCopiedColor] = useState("");
 
   const toggleSelectedBrand = (slug) => {
     if (selectedBrand.includes(slug)) {
@@ -23,6 +26,15 @@ function App() {
     }
   };
 
+  useEffect(() => {
+    if (copied) {
+      const timeout = setTimeout(() => {
+        setCopied(false);
+      }, 1000);
+      return () => clearTimeout(timeout);
+    }
+  }, [copied]);
+
   const data = {
     brandsArray,
     brands,
@@ -30,12 +42,15 @@ function App() {
     selectedBrand,
     setSelectedBrand,
     toggleSelectedBrand,
+    setCopiedColor,
+    setCopied,
   };
 
   return (
     <>
       <MainContext.Provider value={data}>
         <div className="overlay">
+          {copied && <CopyNotification color={copiedColor} />}
           <Sidebar />
           <Router>
             <Routes>

@@ -3,9 +3,10 @@ import Brand from "./Brand";
 import { useContext, useEffect, useState } from "react";
 import MainContext from "../MainContext";
 import { CiSearch } from "react-icons/ci";
+import { VList } from "virtua";
 
 const Content = () => {
-  const { brands } = useContext(MainContext);
+  const { brands, selectedBrand } = useContext(MainContext);
 
   const [search, setSearch] = useState("");
   const [searchedBrand, setSearchedBrand] = useState([]);
@@ -33,11 +34,20 @@ const Content = () => {
           placeholder="Search for colors..."
           onChange={(e) => setSearch(e.target.value)}
         />
-        <BrandHandler />
+        {selectedBrand.length > 0 && <BrandHandler />}
       </header>
-      {searchedBrand.map((brand, key) => (
-        <Brand key={key} brand={brand}></Brand>
-      ))}
+      {searchedBrand.length === 0 && (
+        <div className="empty">
+          <h1>No brands found</h1>
+        </div>
+      )}
+      {searchedBrand.length > 0 && (
+        <VList style={{ maxHeight: 890 }}>
+          {searchedBrand.map((brand, i) => (
+            <Brand key={i} brand={brand}></Brand>
+          ))}
+        </VList>
+      )}
     </div>
   );
 };

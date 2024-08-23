@@ -168,6 +168,7 @@ body {
       border-radius: 5px;
       background-color: white;
       margin: 1em;
+      margin-bottom: 0;
 
       & h3 {
         margin: 0;
@@ -221,6 +222,15 @@ body {
         }
       }
     }
+
+    & .empty {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5em;
+      color: #9a9a9a;
+      height: 100vh;
+    }
   }
 }
 
@@ -233,4 +243,5 @@ body {
   border-radius: 5px;
   box-shadow: 120px 80px 40px 20px rgb(255, 255, 255);
   text-indent: 0;
+  z-index: 1000;
 }

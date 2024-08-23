@@ -1,23 +1,11 @@
-import { useEffect, useState } from "react";
 import { IoCopyOutline } from "react-icons/io5";
-import CopyNotification from "./CopyNotification";
 import { getContrast } from "../helpers";
 import MainContext from "../MainContext";
 import { useContext } from "react";
 
 const Brand = ({ brand }) => {
-  const { selectedBrand, toggleSelectedBrand } = useContext(MainContext);
-  const [copied, setCopied] = useState(false);
-  const [copiedColor, setCopiedColor] = useState("");
-
-  useEffect(() => {
-    if (copied) {
-      const timeout = setTimeout(() => {
-        setCopied(false);
-      }, 1000);
-      return () => clearTimeout(timeout);
-    }
-  }, [copied]);
+  const { selectedBrand, toggleSelectedBrand, setCopiedColor, setCopied } =
+    useContext(MainContext);
 
   return (
     <div
@@ -44,7 +32,6 @@ const Brand = ({ brand }) => {
             }}
           >
             <IoCopyOutline className="copy" />#{color}
-            {copied && <CopyNotification color={copiedColor} />}
           </div>
         ))}
       </div>
