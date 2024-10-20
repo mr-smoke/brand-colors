@@ -33,12 +33,14 @@ const SavedBrands = () => {
           </div>
         )}
         {selectedBrand.length > 0 && (
-          <VList style={{ maxHeight: 890 }}>
-            {selectedBrand.map((slug, key) => {
-              let savedBrands = brands.find((brand) => brand.slug === slug);
-              return <Brand key={key} brand={savedBrands}></Brand>;
-            })}
-          </VList>
+          <div className="virtual-list">
+            <VList style={{ maxHeight: 890 }}>
+              {selectedBrand.map((slug, key) => {
+                let savedBrands = brands.find((brand) => brand.slug === slug);
+                return <Brand key={key} brand={savedBrands}></Brand>;
+              })}
+            </VList>
+          </div>
         )}
       </div>
     </>

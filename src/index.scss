@@ -232,6 +232,10 @@ body {
       color: #9a9a9a;
       height: 100vh;
     }
+
+    & .virtual-list {
+      height: calc(100vh - 60px);
+    }
   }
 
   @media (max-width: 768px) {
@@ -263,6 +267,10 @@ body {
           border-top: 1px solid #9a9a9a;
           padding: 0.5em 0;
         }
+      }
+
+      & .virtual-list {
+        height: calc(100vh - 82px);
       }
     }
 
