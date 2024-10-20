@@ -19,10 +19,12 @@ const SavedBrands = () => {
     <>
       <div className="main-content">
         <header className="header">
-          <Link to="/" className="back">
-            <IoArrowBack />
-          </Link>
-          <p className="title">All Brands</p>
+          <div className="header-content">
+            <Link to="/" className="icon">
+              <IoArrowBack size={32} />
+            </Link>
+            <p className="title">All Brands</p>
+          </div>
           {selectedBrand.length > 0 && <BrandHandler />}
         </header>
         {selectedBrand.length === 0 && (

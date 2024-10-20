@@ -34,7 +34,7 @@ body {
 
 .overlay {
   display: flex;
-  
+
   & .sidebar {
     position: sticky;
     top: 0;
@@ -63,32 +63,38 @@ body {
 
     & .header {
       display: flex;
-      height: 60px;
       width: 100%;
+      height: 60px;
       border-bottom: 1px solid #9a9a9a;
+      background-color: white;
       position: sticky;
       top: 0;
 
-      & .search-icon {
+      & .icon {
         display: flex;
         align-items: center;
         justify-content: center;
-        width: 60px;
-        height: 60px;
         background-color: #646cff;
         color: white;
-        font-size: 2em;
+        height: 100%;
+        width: 60px;
       }
 
-      & input {
-        flex: 1;
-        height: 100%;
-        border: none;
-        font-size: 1.5em;
-        padding: 0 1em;
+      & .search-bar {
+        width: 100%;
+        display: flex;
+        align-items: center;
+        font-size: 1.8em;
 
-        &:focus {
-          outline: none;
+        & input {
+          height: 100%;
+          border: none;
+          font-size: 1.5em;
+          padding: 0 0.5em;
+
+          &:focus {
+            outline: none;
+          }
         }
       }
 
@@ -96,11 +102,9 @@ body {
         display: flex;
         align-items: center;
         justify-content: space-between;
-        height: 60px;
         gap: 1em;
         background-color: white;
-        border-bottom: 1px solid #9a9a9a;
-        
+
         & .share-brands {
           display: flex;
           align-items: center;
@@ -140,15 +144,12 @@ body {
         }
       }
 
-      & .back {
+      &-content {
+        width: 100%;
         display: flex;
         align-items: center;
-        justify-content: center;
-        width: 60px;
-        height: 60px;
-        background-color: #646cff;
-        color: white;
-        font-size: 2em;
+        justify-content: space-between;
+        background-color: white;
       }
 
       & .title {
@@ -157,7 +158,7 @@ body {
         flex: 1;
         background-color: white;
         height: 100%;
-        font-size: 1.5em;
+        font-size: 1.8em;
         font-weight: 500;
         padding: 0 1em;
       }
@@ -189,7 +190,7 @@ body {
           width: 80px;
           height: 40px;
           background-color: white;
-          box-shadow: inset 0 0 0 1px rgba(0,0,0,0.1);
+          box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
           text-indent: -9999px;
 
           & .copy {
@@ -230,6 +231,43 @@ body {
       font-size: 1.5em;
       color: #9a9a9a;
       height: 100vh;
+    }
+  }
+
+  @media (max-width: 768px) {
+    & .sidebar {
+      display: none;
+    }
+
+    & .main-content {
+      & .header {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+
+        & .title {
+          font-size: 1.1rem;
+        }
+
+        & .icon {
+          width: 40px;
+        }
+
+        & .search-bar {
+          & input {
+            font-size: 1.1rem;
+          }
+        }
+
+        & .selected-brands {
+          border-top: 1px solid #9a9a9a;
+          padding: 0.5em 0;
+        }
+      }
+    }
+
+    & .empty {
+      text-align: center;
     }
   }
 }

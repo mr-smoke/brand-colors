@@ -1,12 +1,13 @@
 import "./App.css";
-import Sidebar from "./components/Sidebar";
-import Content from "./components/Content";
-import SavedBrands from "./components/SavedBrands";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainContext from "./MainContext";
-import { useEffect, useState } from "react";
+import { lazy, Suspense, useEffect, useState } from "react";
 import BrandsData from "./brands.json";
 import CopyNotification from "./components/CopyNotification";
+import Sidebar from "./components/Sidebar";
+
+const Content = lazy(() => import("./components/Content"));
+const SavedBrands = lazy(() => import("./components/SavedBrands"));
 
 function App() {
   let brandsArray = [];
@@ -52,12 +53,14 @@ function App() {
         <div className="overlay">
           {copied && <CopyNotification color={copiedColor} />}
           <Sidebar />
-          <Router>
-            <Routes>
-              <Route path="/" element={<Content />} />
-              <Route path="/saved/:slugs" element={<SavedBrands />} />
-            </Routes>
-          </Router>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Router>
+              <Routes>
+                <Route path="/" element={<Content />} />
+                <Route path="/saved/:slugs" element={<SavedBrands />} />
+              </Routes>
+            </Router>
+          </Suspense>
         </div>
       </MainContext.Provider>
     </>

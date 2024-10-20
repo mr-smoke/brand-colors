@@ -1,52 +1,69 @@
-import BrandHandler from "./BrandHandler";
-import Brand from "./Brand";
-import { useContext, useEffect, useState } from "react";
+import {
+  lazy,
+  Suspense,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import MainContext from "../MainContext";
 import { CiSearch } from "react-icons/ci";
 import { VList } from "virtua";
+import { useDebounce } from "use-debounce";
+
+const Brand = lazy(() => import("./Brand"));
+const BrandHandler = lazy(() => import("./BrandHandler"));
 
 const Content = () => {
   const { brands, selectedBrand } = useContext(MainContext);
 
   const [search, setSearch] = useState("");
+  const [debouncedSearch] = useDebounce(search, 300);
   const [searchedBrand, setSearchedBrand] = useState([]);
 
   useEffect(() => {
-    if (search === "") {
+    if (debouncedSearch === "") {
       setSearchedBrand(brands);
     } else {
       setSearchedBrand(
         brands.filter((brand) =>
-          brand.title.toLowerCase().includes(search.toLowerCase())
+          brand.title.toLowerCase().includes(debouncedSearch.toLowerCase())
         )
       );
     }
-  }, [search, brands]);
+  }, [debouncedSearch, brands]);
+
+  const memoizedBrands = useMemo(() => {
+    return searchedBrand.map((brand, i) => (
+      <Brand key={i} brand={brand}></Brand>
+    ));
+  }, [searchedBrand]);
 
   return (
     <div className="main-content">
       <header className="header">
-        <div className="search-icon">
-          <CiSearch />
+        <div className="search-bar">
+          <div className="icon">
+            <CiSearch size={32} />
+          </div>
+          <input
+            type="text"
+            placeholder="Search for colors..."
+            onChange={(e) => setSearch(e.target.value)}
+          />
         </div>
-        <input
-          type="text"
-          placeholder="Search for colors..."
-          onChange={(e) => setSearch(e.target.value)}
-        />
-        {selectedBrand.length > 0 && <BrandHandler />}
+        {selectedBrand.length > 0 && (
+          <Suspense fallback={<div>Loading...</div>}>
+            <BrandHandler />
+          </Suspense>
+        )}
       </header>
-      {searchedBrand.length === 0 && (
+      {searchedBrand.length === 0 ? (
         <div className="empty">
           <h1>No brands found</h1>
         </div>
-      )}
-      {searchedBrand.length > 0 && (
-        <VList style={{ maxHeight: 890 }}>
-          {searchedBrand.map((brand, i) => (
-            <Brand key={i} brand={brand}></Brand>
-          ))}
-        </VList>
+      ) : (
+        <VList style={{ maxHeight: 890 }}>{memoizedBrands}</VList>
       )}
     </div>
   );
