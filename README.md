@@ -58,7 +58,7 @@ To set up the project locally, follow these steps:
 
 ## Usage
 
-To use the admin dashboard, follow these steps:
+To use the color palette, follow these steps:
 
 1. Open your browser and navigate to `http://localhost:5173`.
 2. Use the search bar to find colors by brand name.
